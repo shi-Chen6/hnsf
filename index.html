@@ -66,37 +66,191 @@ body {
 .tag-done { background: #E8F5E9; color: #2E7D32; }
 .tag-current { background: #E3F2FD; color: #1565C0; }
 .tag-locked { background: #F5F5F5; color: #9E9E9E; }
-.knowledge-section { margin-bottom: 20px; }
-.knowledge-section h3 {
-  font-size: 18px; color: var(--primary); margin-bottom: 12px;
-  padding-left: 12px; border-left: 3px solid var(--primary);
+/* ========== 知识点页 - 全局样式 ========== */
+/* 章节区块 - 卡片化设计 */
+.knowledge-section, .section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 16px rgba(100,120,180,0.07);
+  border: 1px solid rgba(100,120,180,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
-.knowledge-section p { margin-bottom: 8px; font-size: 15px; }
-.knowledge-section .tip-box {
-  background: #FFF8E1; border-left: 4px solid #FFC107; padding: 10px 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 14px;
+/* 章节顶部装饰线 */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+  border-radius: 14px 14px 0 0;
 }
-.knowledge-section .mnemonic-box {
-  background: #E8F0FE; border-left: 4px solid var(--primary); padding: 10px 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 14px;
+/* 小节标题 */
+.knowledge-section h3, .section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 14px 0;
+  padding: 6px 0 6px 14px;
+  border-left: 4px solid #667eea;
+  background: linear-gradient(90deg, rgba(102,126,234,0.06) 0%, rgba(102,126,234,0) 100%);
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
 }
-.knowledge-section .warning-box {
-  background: #FFF3E0; border-left: 4px solid var(--warning); padding: 10px 14px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 14px;
+.knowledge-section p { margin-bottom: 10px; font-size: 15px; line-height: 1.8; color: #4a5568; }
+
+/* 提示框 - 小贴士 */
+.tip-box {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef9e7 100%);
+  border-left: 5px solid #f59e0b;
+  padding: 14px 16px 14px 42px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #92400e;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.08);
 }
-.knowledge-section .summary-box {
-  background: #E8F5E9; border-radius: var(--radius-sm); padding: 14px; margin-top: 16px;
+.tip-box::before {
+  content: '💡';
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  font-size: 18px;
 }
-.knowledge-section table {
-  width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px;
+.tip-box strong { color: #d97706; }
+
+/* 记忆口诀框 */
+.mnemonic-box {
+  background: linear-gradient(135deg, #eff6ff 0%, #eef2ff 100%);
+  border-left: 5px solid #6366f1;
+  padding: 14px 16px 14px 42px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #3730a3;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
 }
-.knowledge-section th {
-  background: var(--primary); color: #fff; padding: 8px 10px; text-align: left;
+.mnemonic-box::before {
+  content: '🧠';
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  font-size: 18px;
 }
-.knowledge-section td {
-  padding: 8px 10px; border-bottom: 1px solid var(--border);
+.mnemonic-box strong { color: #4f46e5; }
+
+/* 易错点警告框 */
+.warning-box {
+  background: linear-gradient(135deg, #fff7ed 0%, #fef2f2 100%);
+  border-left: 5px solid #f97316;
+  padding: 14px 16px 14px 42px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #9a3412;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(249,115,22,0.08);
 }
-.knowledge-section tr:nth-child(even) td { background: #FAFBFC; }
+.warning-box::before {
+  content: '⚠️';
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  font-size: 18px;
+}
+.warning-box strong { color: #ea580c; }
+
+/* 示例框 */
+.example-box {
+  background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+  border-left: 5px solid #a855f7;
+  padding: 14px 16px 14px 42px;
+  border-radius: 0 10px 10px 0;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #6b21a8;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(168,85,247,0.08);
+}
+.example-box::before {
+  content: '📝';
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  font-size: 18px;
+}
+
+/* 总结框 */
+.summary-box {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border: 2px solid #86efac;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #166534;
+  box-shadow: 0 2px 12px rgba(34,197,94,0.06);
+  position: relative;
+  padding-left: 44px;
+}
+.summary-box::before {
+  content: '📋';
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  font-size: 20px;
+}
+
+/* 表格 */
+.knowledge-section table, .info-table, .knowledge-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 14px 0;
+  font-size: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.knowledge-section th, .info-table th, .knowledge-table th {
+  background: linear-gradient(135deg, #667eea 0%, #5a67d8 100%);
+  color: #fff;
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+.knowledge-section td, .info-table td, .knowledge-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fff;
+  vertical-align: top;
+  color: #4a5568;
+  transition: background 0.15s;
+}
+.knowledge-section tr:last-child td, .info-table tr:last-child td, .knowledge-table tr:last-child td {
+  border-bottom: none;
+}
+.knowledge-section tr:nth-child(even) td, .info-table tr:nth-child(even) td, .knowledge-table tr:nth-child(even) td {
+  background: #f8fafc;
+}
+.knowledge-section tr:hover td, .info-table tr:hover td, .knowledge-table tr:hover td {
+  background: #eef2ff;
+}
 .sticky-bottom {
   position: sticky; bottom: 0; background: var(--bg); padding: 16px 0 8px;
   margin-top: 20px;
@@ -202,18 +356,150 @@ body {
 }
 .confirm-dialog .dialog-title { font-size: 18px; font-weight: bold; margin-bottom: 12px; }
 .confirm-dialog .dialog-text { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
-/* 数据文件中使用的额外样式 */
-.knowledge-box h3, .knowledge-day h2 { font-size: 20px; font-weight: bold; color: var(--primary); margin-bottom: 16px; }
-.knowledge-day h3 { font-size: 17px; color: var(--ink); margin: 16px 0 8px; padding-left: 10px; border-left: 3px solid var(--primary); }
-.knowledge-day h4, .knowledge-box h4 { font-size: 16px; font-weight: 600; color: var(--ink); margin: 12px 0 6px; }
-.section { margin-bottom: 16px; }
-.section ul { padding-left: 20px; margin: 8px 0; }
-.section li { margin-bottom: 4px; font-size: 15px; }
-.info-table, .knowledge-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
-.info-table th, .knowledge-table th { background: var(--primary); color: #fff; padding: 8px 10px; text-align: left; }
-.info-table td, .knowledge-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
-.info-table tr:nth-child(even) td, .knowledge-table tr:nth-child(even) td { background: #FAFBFC; }
-.example-box { background: #F3E5F5; border-left: 4px solid #9C27B0; padding: 10px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 14px; }
+/* ========== 知识点页 - 标题与列表样式 ========== */
+/* 知识盒子主标题 */
+.knowledge-box > h3, .knowledge-day > h2 {
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #f0f0f0;
+  letter-spacing: 1px;
+}
+/* 子标题 */
+.knowledge-day h3, .knowledge-box h3:not(:first-child) {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 18px 0 10px;
+  padding: 6px 0 6px 14px;
+  border-left: 4px solid #667eea;
+  background: linear-gradient(90deg, rgba(102,126,234,0.06) 0%, transparent 100%);
+  border-radius: 0 6px 6px 0;
+}
+/* 小节标题 */
+.knowledge-day h4, .knowledge-box h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 16px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* 列表 */
+.section ul, .knowledge-box ul, .knowledge-day ul {
+  padding-left: 6px;
+  margin: 10px 0;
+  list-style: none;
+}
+.section li, .knowledge-box li, .knowledge-day li {
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 1.8;
+  padding: 9px 14px 9px 34px;
+  position: relative;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #4a5568;
+  transition: background 0.2s, transform 0.15s;
+  border: 1px solid transparent;
+}
+.section li:hover, .knowledge-box li:hover, .knowledge-day li:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  transform: translateX(2px);
+}
+.section li::before, .knowledge-box li::before, .knowledge-day li::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 16px;
+  width: 7px;
+  height: 7px;
+  background: #667eea;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
+}
+.section li strong, .knowledge-box li strong, .knowledge-day li strong {
+  color: #4f46e5;
+  font-weight: 600;
+}
+/* 高亮文字 */
+.highlight {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+}
+p.highlight {
+  display: block;
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  margin: 12px 0;
+}
+/* 知识点内容段落 */
+.knowledge-box p, .knowledge-day p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #4a5568;
+}
+/* 知识点页头部 */
+#page-knowledge .header-nav {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: -20px -16px 0 -16px;
+  padding: 16px 16px 14px 16px;
+  border-radius: 0 0 20px 20px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(102,126,234,0.25);
+}
+#page-knowledge .header-nav h2 { color: #fff; font-size: 18px; }
+#page-knowledge .back-btn {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  box-shadow: none;
+}
+#page-knowledge .header-nav .tag {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+/* 知识点内容区 */
+#k-content {
+  padding-top: 6px;
+}
+/* 知识点页底部按钮 */
+#page-knowledge .sticky-bottom {
+  background: linear-gradient(0deg, var(--bg) 70%, transparent 100%);
+  padding: 20px 0 8px;
+}
+#page-knowledge .sticky-bottom .btn {
+  border-radius: 14px;
+  font-size: 17px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 16px rgba(102,126,234,0.3);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#page-knowledge .sticky-bottom .btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(102,126,234,0.2);
+}
+
 /* 错题本 */
 .wrong-card { border-left: 4px solid var(--danger); }
 .wrong-card .wrong-day { font-size: 12px; color: var(--light); }
